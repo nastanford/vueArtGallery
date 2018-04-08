@@ -3,15 +3,19 @@ import GalleryList from "./galleryList.js";
 export default {
   template: `
   <div>
-    Main App
-    <ul>
-      <li v-for="art in artlist.results">{{art.artname}}</li>
-    </ul>
-  <div>
-  {{artlist}}
-  </div>
+    <div v-for="a, i in artlist['RESULTS']">
+      <b>Art ID:</b>  {{a['ARTID']}}
+      <b>Art Name:</b>  {{a['ARTNAME']}}
+      <b>Description:</b>  {{a['DESCRIPTION']}}
+      <b>issold:</b>  {{a['ISSOLD']}}
+      <b>Large Image:</b>  {{a['LARGEIMAGE']}}
+      <b>Media Type:</b>  {{a['MEDIATYPE']}}
+      <b>Price:</b>  {{a['PRICE']}}
+      <hr />
+    </div>
 
   </div>
+
   `,
   components: {
   },
