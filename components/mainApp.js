@@ -11,7 +11,7 @@ export default {
       <b>Large Image:</b>  {{a['LARGEIMAGE']}}
       <b>Media Type:</b>  {{a['MEDIATYPE']}}
       <b>Price:</b>  {{a['PRICE']}}
-      <hr />
+      <br />
     </div>
 
   </div>

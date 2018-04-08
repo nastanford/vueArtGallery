@@ -13,7 +13,7 @@
             <cfif structKeyExists(arguments,"searchTerm") and len(trim(arguments.searchTerm))>
                 and upper(a.DESCRIPTION) like upper(<cfqueryparam cfsqltype="cf_sql_varchar" value="%#arguments.searchTerm#%" />)
             </cfif>
-            ORDER BY a.ARTNAME DESC
+            ORDER BY lower(a.ARTNAME) ASC
         </cfquery>
         
         <cfset var qryStruct = structNew() />
