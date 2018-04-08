@@ -4,14 +4,15 @@ export default {
   template: `
   <div>
     <div v-for="a, i in artlist['RESULTS']">
-      <b>Art ID:</b>  {{a['ARTID']}}
-      <b>Art Name:</b>  {{a['ARTNAME']}}
-      <b>Description:</b>  {{a['DESCRIPTION']}}
-      <b>issold:</b>  {{a['ISSOLD']}}
+      <!-- <b>Art ID:</b>  {{a['ARTID']}} -->
+      <b>Name:</b>  {{a['ARTNAME']}}<br>
+      <b>Description:</b><br>
+      {{a['DESCRIPTION']}}<br>
+      <!-- <b>issold:</b>  {{a['ISSOLD']}}
       <b>Large Image:</b>  {{a['LARGEIMAGE']}}
-      <b>Media Type:</b>  {{a['MEDIATYPE']}}
+      <b>Media Type:</b>  {{a['MEDIATYPE']}} -->
       <b>Price:</b>  {{a['PRICE']}}
-      <br />
+      <br /><br />
     </div>
 
   </div>
