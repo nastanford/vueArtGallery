@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Vue.js Single-File JavaScript Component Demo</title>
+  <title>Vue Art Gallery</title>
   <script src="./js/vue.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -19,10 +19,6 @@
         with a default sample database that is installed when you install 
         ColdFusion
       </p>
-    </div>
-
-    <div>
-      <input type="text" placeholder="Search..">
     </div>
 
   <div id="app">

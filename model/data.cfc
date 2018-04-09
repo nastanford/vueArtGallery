@@ -1,7 +1,6 @@
 <cfcomponent output="false"  >
 <cfset variables.dsn = "cfartgallery" />
 
-<!---    Date: 4/6/2018 Usage: getData --->
     <cffunction name="getData" output="false" access="remote" returntype="any" returnformat="plain" hint="getData">
         <cfargument name="searchTerm" type="any" required="false"/>
         <cfset var getArt = ""/>
