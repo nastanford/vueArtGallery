@@ -1,5 +1,6 @@
 # Vue Art Gallery 
-    This is a simple Vue Application that currently is calling a ColdFusion CFC to a database that gets installed when setting up a ColdFusion Server called CFArtGallery. This is not using a node-modules folder just the Vue.js file.
+
+This is a simple Vue Application that currently is calling a ColdFusion CFC to a database that gets installed when setting up a ColdFusion Server called CFArtGallery. This is not using a node-modules folder just the Vue.js file.
 
 * VueJS
 * ColdFusion CFC
