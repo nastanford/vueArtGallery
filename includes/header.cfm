@@ -15,9 +15,7 @@
     <div class="jumbotron">
       <h1>Vue Art Gallery </h1>
       <p>
-        This example was created using a Vue and the backend of ColdFusion 
-        with a default sample database that is installed when you install 
-        ColdFusion
+        A simple Search and Autosuggest using Vue, CF API and Datalist. 
       </p>
     </div>
 
