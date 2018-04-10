@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Vue Art Gallery</title>
+  <title>Vue Art Gallery | Nathan Stanford Sr</title>
   <script src="./js/vue.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -15,7 +15,7 @@
     <div class="jumbotron">
       <h1>Vue Art Gallery </h1>
       <p>
-        A simple Search and Autosuggest using Vue, CF API and Datalist. 
+        A simple Search and Autosuggest using Vue, ColdFusion CFC for the API and Datalist. 
       </p>
     </div>
 

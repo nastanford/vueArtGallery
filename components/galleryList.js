@@ -6,37 +6,31 @@ export default {
         <option v-for="artName, index in artNames['RESULTS']">{{artName['ARTNAME']}} </option>
       </datalist>
       <button @click="getSearchResults">Search</button>
-      <p>Search Text: {{ searchText }}</p> 
+      <div v-if="artlist['RESULTCOUNT'] > 0">
+        <h5>(Count: {{artlist['RESULTCOUNT']}})</h5>
 
-
-      <h5 v-if="artlist['RESULTCOUNT'] > 0">(Count: {{artlist['RESULTCOUNT']}})</h5>
-
-      <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Type</th>
-          <th scope="col">Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="a, i in artlist['RESULTS']">
-          <th scope="row">{{a['ARTID']}}</th>
-          <td>{{a['ARTNAME']}}</td>
-          <td>{{a['DESCRIPTION']}}</td>
-          <td>{{a['MEDIATYPE']}}</td>
-          <td>{{ formatPrice(a['PRICE']) }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-
-     
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Type</th>
+              <th scope="col">Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="a, i in artlist['RESULTS']">
+              <th scope="row">{{a['ARTID']}}</th>
+              <td>{{a['ARTNAME']}}</td>
+              <td>{{a['DESCRIPTION']}}</td>
+              <td>{{a['MEDIATYPE']}}</td>
+              <td>{{ formatPrice(a['PRICE']) }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-
-
     `,
     mounted() {
       fetch("http://localhost:8500/vue/vueArtGallery/model/data.cfc?method=getArtNames")
