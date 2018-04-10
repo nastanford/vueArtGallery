@@ -1,7 +1,7 @@
 export default {
   template: `
     <div id="art-gallery">
-      <input type="text" placeholder="Search.." list="test" v-model="searchText">
+      <input type="text" placeholder="Search.." list="test" v-model="searchText" @keyup.enter="getSearchResults">
       <datalist id="test">
         <option v-for="artName, index in artNames['RESULTS']">{{artName['ARTNAME']}} </option>
       </datalist>
@@ -9,16 +9,34 @@ export default {
       <p>Search Text: {{ searchText }}</p> 
 
 
-      <h6 v-if="artlist['RESULTCOUNT'] > 0">(Count: {{artlist['RESULTCOUNT']}})</h6>
-      <div v-for="a, i in artlist['RESULTS']">
-        <!-- <b>Art ID:</b>  {{a['ARTID']}} -->
-        [{{a['ARTID']}}] {{a['ARTNAME']}} {{a['DESCRIPTION']}} ({{a['MEDIATYPE']}})
-        <!-- <b>issold:</b>  {{a['ISSOLD']}}
-        <b>Large Image:</b>  {{a['LARGEIMAGE']}}
-        <b>Media Type:</b>  {{a['MEDIATYPE']}} -->
-        {{ formatPrice(a['PRICE']) }}
-      </div>
+      <h5 v-if="artlist['RESULTCOUNT'] > 0">(Count: {{artlist['RESULTCOUNT']}})</h5>
+
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Type</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="a, i in artlist['RESULTS']">
+          <th scope="row">{{a['ARTID']}}</th>
+          <td>{{a['ARTNAME']}}</td>
+          <td>{{a['DESCRIPTION']}}</td>
+          <td>{{a['MEDIATYPE']}}</td>
+          <td>{{ formatPrice(a['PRICE']) }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+     
     </div>
+
+
     `,
     mounted() {
       fetch("http://localhost:8500/vue/vueArtGallery/model/data.cfc?method=getArtNames")
