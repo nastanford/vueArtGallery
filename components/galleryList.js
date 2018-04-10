@@ -1,8 +1,15 @@
 export default {
   template: `
     <div id="art-gallery">
-      <input type="text" placeholder="Search.." id="gallerySearch">
-      <h6>(Count: {{artlist['RESULTCOUNT']}})</h6>
+      <input type="text" placeholder="Search.." list="test" v-model="searchText">
+      <datalist id="test">
+        <option v-for="artName, index in artNames['RESULTS']">{{artName['ARTNAME']}} </option>
+      </datalist>
+      <button @click="getSearchResults">Search</button>
+      <p>Search Text: {{ searchText }}</p> 
+
+
+      <h6 v-if="artlist['RESULTCOUNT'] > 0">(Count: {{artlist['RESULTCOUNT']}})</h6>
       <div v-for="a, i in artlist['RESULTS']">
         <!-- <b>Art ID:</b>  {{a['ARTID']}} -->
         [{{a['ARTID']}}] {{a['ARTNAME']}} {{a['DESCRIPTION']}} ({{a['MEDIATYPE']}})
@@ -14,15 +21,19 @@ export default {
     </div>
     `,
     mounted() {
-      fetch("http://localhost:8500/vue/vueArtGallery/model/data.cfc?method=getData&searchTerm=")
+      fetch("http://localhost:8500/vue/vueArtGallery/model/data.cfc?method=getArtNames")
       .then(response => response.json())
       .then((data) => {
-        this.artlist = data;
+      this.artNames = data;
       })
     },
       data() {
-      return {
-        artlist: [],
+        return {
+          artlist: [],
+          artNames: [],
+          mediaTypeList: [],
+          testList: [],
+          searchText: ""
       }
     
     },
@@ -32,6 +43,20 @@ export default {
           let newval = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
           let dollarsign ='$'        
           return dollarsign.concat(newval)
-      }
+      },
+      getMediaType() {
+        fetch("http://localhost:8500/vue/vueArtGallery/model/data.cfc?method=getMedia")
+        .then(response => response.json())
+        .then((data) => {
+          this.mediaTypeList = data;
+        })
+      },
+      getSearchResults() {
+        fetch("http://localhost:8500/vue/vueArtGallery/model/data.cfc?method=getArt&searchTerm="+this.searchText)
+        .then(response => response.json())
+        .then((data) => {
+          this.artlist = data;
+        })          
+      }        
     }
   }
