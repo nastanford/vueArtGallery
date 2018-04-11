@@ -1,14 +1,14 @@
 export default {
   template: `
     <div id="art-gallery">
-      <input type="text" placeholder="Search.." list="test" v-model="searchText" @keyup.enter="getSearchResults">
+      <input type="text" placeholder="Search.." list="test" v-model="searchText" @keyup="keymonitor">
       <datalist id="test">
         <option v-for="artName, index in artNames['RESULTS']">{{artName['ARTNAME']}} </option>
       </datalist>
       <button @click="getSearchResults">Search</button>
+      <!-- Search Text: {{ searchText.length }} -->
       <div v-if="artlist['RESULTCOUNT'] > 0">
         <h5>(Count: {{artlist['RESULTCOUNT']}})</h5>
-
         <table class="table">
           <thead>
             <tr>
@@ -49,6 +49,13 @@ export default {
       }
     
     },
+    computed: {
+      searchTextLength: function () {
+        if(this.searchText.length > 2){
+          alert('a'); 
+        }
+      },
+    },
     methods: {
       formatPrice(value) {
           let val = (value/1).toFixed(2).replace('.', ',')
@@ -69,6 +76,14 @@ export default {
         .then((data) => {
           this.artlist = data;
         })          
-      }        
+      },
+      keymonitor: function(event) {
+        console.log(event.key);
+        if(this.searchText.length > 2 || event.key == "Enter") {
+          this.getSearchResults();
+        }
+      }
+
+
     }
   }
