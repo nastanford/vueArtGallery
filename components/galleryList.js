@@ -33,7 +33,7 @@ export default {
     </div>
     `,
     mounted() {
-      fetch("http://localhost:8500/vue/vueArtGallery/model/data.cfc?method=getArtNames")
+      fetch("http://localhost:8500/vue/vueArtGallery/model/art.cfc?method=getArtNames")
       .then(response => response.json())
       .then((data) => {
       this.artNames = data;
@@ -63,6 +63,7 @@ export default {
           let dollarsign ='$'        
           return dollarsign.concat(newval)
       },
+      // TODO: add to art.cfc later
       getMediaType() {
         fetch("http://localhost:8500/vue/vueArtGallery/model/data.cfc?method=getMedia")
         .then(response => response.json())
@@ -71,7 +72,7 @@ export default {
         })
       },
       getSearchResults() {
-        fetch("http://localhost:8500/vue/vueArtGallery/model/data.cfc?method=getArt&searchTerm="+this.searchText)
+        fetch("http://localhost:8500/vue/vueArtGallery/model/art.cfc?method=getArt&searchTerm="+this.searchText)
         .then(response => response.json())
         .then((data) => {
           this.artlist = data;
