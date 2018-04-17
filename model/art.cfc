@@ -1,14 +1,17 @@
 component {
-
   //
   variables.dsn = "cfartgallery";
 
   // Search through the Art by name
-  remote any function getArt(string searchTerm) {
+  remote any function getArt(string searchTerm ) {
     var q = new query();
     q.setDatasource(variables.dsn);
-    q.addParam(name="searchParam",value="%" & LCase(arguments.searchTerm) & "%", CFSQLTYPE="CF_SQL_VARCHAR");
-    var qString = 'SELECT  a.* FROM ART a, MEDIA m WHERE a.MEDIAID = m.MEDIAID and LOWER(a.artname) like :searchParam'; 
+    var qString = 'SELECT  a.* FROM ART a, MEDIA m WHERE a.MEDIAID = m.MEDIAID'; 
+    if((structKeyExists(arguments,"searchTerm")) && (len(arguments.searchTerm)) > 0) {
+      q.addParam(name="searchParam",value="%" & LCase(arguments.searchTerm) & "%", CFSQLTYPE="CF_SQL_VARCHAR");
+      qString &= " and LOWER(a.artname) like :searchParam";
+    }
+
     q.setSQL(qString);
     // This sets the return of this function to json format
     url.returnformat = 'json';

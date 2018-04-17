@@ -1,10 +1,16 @@
 export default {
   template: `
     <div id="art-gallery">
-      <input type="text" placeholder="Search.." list="test" v-model="searchText" @keyup="keymonitor">
-      <datalist id="test">
+      <input type="text" placeholder="Search.." list="artDataList" v-model="searchText" @keyup="keymonitor">
+      <datalist id="artDataList">
+        <option v-for="artName, index in artNames">{{artName}} </option>
+      </datalist>
+      <!---
+      This was used when I did not parse out the data to only send the art names.
+      <datalist id="artDataList">
         <option v-for="artName, index in artNames['RESULTS']">{{artName['ARTNAME']}} </option>
       </datalist>
+      --->      
       <button @click="getSearchResults">Search</button>
       <!-- Search Text: {{ searchText.length }} -->
       <div v-if="artlist['RESULTCOUNT'] > 0">
@@ -33,7 +39,7 @@ export default {
     </div>
     `,
     mounted() {
-      fetch("http://localhost:8500/vue/vueArtGallery/model/art.cfc?method=getArtNames")
+      fetch("/vue/vueArtGallery/model/art.cfc?method=getArtNames")
       .then(response => response.json())
       .then((data) => {
       this.artNames = data;
@@ -65,14 +71,14 @@ export default {
       },
       // TODO: add to art.cfc later
       getMediaType() {
-        fetch("http://localhost:8500/vue/vueArtGallery/model/data.cfc?method=getMedia")
+        fetch("/vue/vueArtGallery/model/data.cfc?method=getMedia")
         .then(response => response.json())
         .then((data) => {
           this.mediaTypeList = data;
         })
       },
       getSearchResults() {
-        fetch("http://localhost:8500/vue/vueArtGallery/model/art.cfc?method=getArt&searchTerm="+this.searchText)
+        fetch("/vue/vueArtGallery/model/data.cfc?method=getArt&searchTerm="+this.searchText)
         .then(response => response.json())
         .then((data) => {
           this.artlist = data;
